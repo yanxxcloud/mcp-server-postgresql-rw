@@ -34,12 +34,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/mcp-server-postgresql-rw.git"
+    "url": "https://github.com/yanxxcloud/mcp-server-postgresql-rw.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/mcp-server-postgresql-rw/issues"
+    "url": "https://github.com/yanxxcloud/mcp-server-postgresql-rw/issues"
   },
-  "homepage": "https://github.com/yourusername/mcp-server-postgresql-rw#readme",
+  "homepage": "https://github.com/yanxxcloud/mcp-server-postgresql-rw#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.4",
     "pg": "^8.11.3"
