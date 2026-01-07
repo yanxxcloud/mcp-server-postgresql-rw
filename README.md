@@ -2,6 +2,12 @@
 
 这是一个支持 PostgreSQL 数据库增删改查和 DDL 操作的 Model Context Protocol (MCP) 服务器。
 
+[![npm version](https://img.shields.io/npm/v/mcp-server-postgresql-rw.svg)](https://www.npmjs.com/package/mcp-server-postgresql-rw)
+[![npm downloads](https://img.shields.io/npm/dm/mcp-server-postgresql-rw.svg)](https://www.npmjs.com/package/mcp-server-postgresql-rw)
+
+📦 **npm 包**: [https://www.npmjs.com/package/mcp-server-postgresql-rw](https://www.npmjs.com/package/mcp-server-postgresql-rw)  
+🐙 **GitHub**: [https://github.com/yanxxcloud/mcp-server-postgresql-rw](https://github.com/yanxxcloud/mcp-server-postgresql-rw)
+
 ## 功能特性
 
 - ✅ **查询（SELECT）**: 执行 SELECT 查询语句，返回查询结果
@@ -13,9 +19,9 @@
 
 ## 快速开始
 
-### 方式 1: 通过 npm 安装（推荐）
+### 方式 1: 通过 npm 安装（⭐ 推荐）
 
-如果你已经将此包发布到 npm，可以直接安装：
+最简单的方式，直接从 npm 安装：
 
 ```bash
 npm install -g mcp-server-postgresql-rw
@@ -36,7 +42,7 @@ npm install -g mcp-server-postgresql-rw
 }
 ```
 
-或者使用 npx（无需全局安装）：
+**或者使用 npx（无需全局安装，推荐）：**
 
 ```json
 {
@@ -54,13 +60,18 @@ npm install -g mcp-server-postgresql-rw
 
 ### 方式 2: 从源码安装
 
+如果你想从源码安装或进行开发：
+
 ```bash
-# 克隆或下载项目
-git clone https://github.com/yourusername/mcp-server-postgresql-rw.git
+# 克隆项目
+git clone https://github.com/yanxxcloud/mcp-server-postgresql-rw.git
 cd mcp-server-postgresql-rw
 
 # 安装依赖
 npm install
+
+# 构建项目（可选，如果使用 npx tsx 方式则不需要）
+npm run build
 ```
 
 然后在 `mcp.json` 中配置（推荐使用 npx tsx 方式，无需构建）：
@@ -88,27 +99,41 @@ npm install
 配置完成后，**重启 Cursor** 即可使用！
 
 > 💡 **提示**: 
-> - 使用 npm 安装的包会自动构建，可以直接使用
-> - 使用 `npx tsx` 方式可以直接运行 TypeScript 源文件，无需先执行 `npm run build`。修改代码后也无需重新构建。
+> - ⭐ **推荐使用 npm 安装**：最简单快捷，包已构建好，开箱即用
+> - 使用 `npx` 方式无需全局安装，每次自动下载最新版本
+> - 从源码安装适合需要修改代码或参与开发的场景
 
 ---
 
 ## 安装
 
-### 方式 1: 使用 npx tsx（推荐，无需构建）
+### 方式 1: 通过 npm 安装（⭐ 推荐）
 
-只需安装依赖：
+最简单的方式，直接从 npm 安装：
 
 ```bash
-npm install
+npm install -g mcp-server-postgresql-rw
 ```
 
-### 方式 2: 使用编译后的文件
-
-如果需要使用编译后的 JavaScript 文件：
+或使用 npx（无需全局安装）：
 
 ```bash
+npx -y mcp-server-postgresql-rw
+```
+
+### 方式 2: 从源码安装
+
+如果你想从源码安装或进行开发：
+
+```bash
+# 克隆项目
+git clone https://github.com/yanxxcloud/mcp-server-postgresql-rw.git
+cd mcp-server-postgresql-rw
+
+# 安装依赖
 npm install
+
+# 构建项目（如果使用编译后的文件）
 npm run build
 ```
 
@@ -244,37 +269,45 @@ mcp.json 文件通常位于以下位置：
 
 如果文件不存在，请创建它。
 
-### 步骤 2: 安装依赖
+### 步骤 2: 配置 mcp.json
 
-进入项目目录并安装依赖：
-
-```bash
-cd /Users/yanxx/tools/mcp/postgresql-server-rw
-npm install
-```
-
-### 步骤 3: 配置 mcp.json
-
-打开或创建 `mcp.json` 文件，添加以下配置。有两种运行方式：
+打开或创建 `mcp.json` 文件，添加以下配置。有三种运行方式：
 
 ---
 
-## 方式 A: 使用 npx tsx 直接运行（推荐，无需构建）
+## 方式 A: 使用 npm 安装（⭐ 最简单，推荐）
 
-这种方式可以直接运行 TypeScript 源文件，无需先执行 `npm run build`。
+直接从 npm 安装，无需构建，开箱即用。
 
-#### 配置方式 A1: 使用连接字符串
+#### 配置方式 A1: 全局安装后使用
+
+```bash
+npm install -g mcp-server-postgresql-rw
+```
+
+```json
+{
+  "mcpServers": {
+    "postgresql-rw": {
+      "command": "mcp-server-postgresql-rw",
+      "env": {
+        "POSTGRES_CONNECTION_STRING": "postgresql://用户名:密码@主机:端口/数据库名"
+      }
+    }
+  }
+}
+```
+
+#### 配置方式 A2: 使用 npx（无需全局安装，推荐）
+
+无需全局安装，每次自动使用最新版本：
 
 ```json
 {
   "mcpServers": {
     "postgresql-rw": {
       "command": "npx",
-      "args": [
-        "-y",
-        "tsx",
-        "/Users/yanxx/tools/mcp/postgresql-server-rw/src/index.ts"
-      ],
+      "args": ["-y", "mcp-server-postgresql-rw"],
       "env": {
         "POSTGRES_CONNECTION_STRING": "postgresql://用户名:密码@主机:端口/数据库名"
       }
@@ -289,11 +322,7 @@ npm install
   "mcpServers": {
     "postgresql-rw": {
       "command": "npx",
-      "args": [
-        "-y",
-        "tsx",
-        "/Users/yanxx/tools/mcp/postgresql-server-rw/src/index.ts"
-      ],
+      "args": ["-y", "mcp-server-postgresql-rw"],
       "env": {
         "POSTGRES_CONNECTION_STRING": "postgresql://postgres:mypassword@localhost:5432/mydb"
       }
@@ -302,7 +331,13 @@ npm install
 }
 ```
 
-#### 配置方式 A2: 使用单独参数
+---
+
+## 方式 B: 使用 npx tsx 直接运行（从源码，无需构建）
+
+这种方式可以直接运行 TypeScript 源文件，无需先执行 `npm run build`。适合从源码安装的场景。
+
+#### 配置方式 B1: 使用连接字符串
 
 ```json
 {
@@ -314,38 +349,6 @@ npm install
         "tsx",
         "/Users/yanxx/tools/mcp/postgresql-server-rw/src/index.ts"
       ],
-      "env": {
-        "POSTGRES_HOST": "localhost",
-        "POSTGRES_PORT": "5432",
-        "POSTGRES_DATABASE": "postgres",
-        "POSTGRES_USER": "postgres",
-        "POSTGRES_PASSWORD": "your_password",
-        "POSTGRES_SSL": "false"
-      }
-    }
-  }
-}
-```
-
----
-
-## 方式 B: 使用编译后的文件（需要先构建）
-
-如果你更喜欢使用编译后的 JavaScript 文件，需要先构建：
-
-```bash
-cd /Users/yanxx/tools/mcp/postgresql-server-rw
-npm run build
-```
-
-#### 配置方式 B1: 使用连接字符串
-
-```json
-{
-  "mcpServers": {
-    "postgresql-rw": {
-      "command": "node",
-      "args": ["/Users/yanxx/tools/mcp/postgresql-server-rw/dist/index.js"],
       "env": {
         "POSTGRES_CONNECTION_STRING": "postgresql://用户名:密码@主机:端口/数据库名"
       }
@@ -359,8 +362,12 @@ npm run build
 {
   "mcpServers": {
     "postgresql-rw": {
-      "command": "node",
-      "args": ["/Users/yanxx/tools/mcp/postgresql-server-rw/dist/index.js"],
+      "command": "npx",
+      "args": [
+        "-y",
+        "tsx",
+        "/Users/yanxx/tools/mcp/postgresql-server-rw/src/index.ts"
+      ],
       "env": {
         "POSTGRES_CONNECTION_STRING": "postgresql://postgres:mypassword@localhost:5432/mydb"
       }
@@ -375,8 +382,12 @@ npm run build
 {
   "mcpServers": {
     "postgresql-rw": {
-      "command": "node",
-      "args": ["/Users/yanxx/tools/mcp/postgresql-server-rw/dist/index.js"],
+      "command": "npx",
+      "args": [
+        "-y",
+        "tsx",
+        "/Users/yanxx/tools/mcp/postgresql-server-rw/src/index.ts"
+      ],
       "env": {
         "POSTGRES_HOST": "localhost",
         "POSTGRES_PORT": "5432",
@@ -392,16 +403,83 @@ npm run build
 
 ---
 
-### 两种方式对比
+## 方式 C: 使用编译后的文件（从源码，需要先构建）
 
-| 特性 | 方式 A (npx tsx) | 方式 B (编译后) |
-|------|------------------|-----------------|
-| 需要构建 | ❌ 不需要 | ✅ 需要 `npm run build` |
-| 启动速度 | 稍慢（首次需要下载 tsx） | 更快 |
-| 开发体验 | ✅ 更好（修改代码后无需重新构建） | 需要重新构建 |
-| 推荐场景 | 开发环境、频繁修改 | 生产环境、稳定版本 |
+如果你从源码安装并想使用编译后的 JavaScript 文件，需要先构建：
 
-**推荐**: 开发时使用**方式 A (npx tsx)**，无需每次修改代码后都重新构建。
+```bash
+cd /path/to/mcp-server-postgresql-rw
+npm install
+npm run build
+```
+
+#### 配置方式 C1: 使用连接字符串
+
+```json
+{
+  "mcpServers": {
+    "postgresql-rw": {
+      "command": "node",
+      "args": ["/path/to/mcp-server-postgresql-rw/dist/index.js"],
+      "env": {
+        "POSTGRES_CONNECTION_STRING": "postgresql://用户名:密码@主机:端口/数据库名"
+      }
+    }
+  }
+}
+```
+
+**实际示例：**
+```json
+{
+  "mcpServers": {
+    "postgresql-rw": {
+      "command": "node",
+      "args": ["/path/to/mcp-server-postgresql-rw/dist/index.js"],
+      "env": {
+        "POSTGRES_CONNECTION_STRING": "postgresql://postgres:mypassword@localhost:5432/mydb"
+      }
+    }
+  }
+}
+```
+
+#### 配置方式 C2: 使用单独参数
+
+```json
+{
+  "mcpServers": {
+    "postgresql-rw": {
+      "command": "node",
+      "args": ["/path/to/mcp-server-postgresql-rw/dist/index.js"],
+      "env": {
+        "POSTGRES_HOST": "localhost",
+        "POSTGRES_PORT": "5432",
+        "POSTGRES_DATABASE": "postgres",
+        "POSTGRES_USER": "postgres",
+        "POSTGRES_PASSWORD": "your_password",
+        "POSTGRES_SSL": "false"
+      }
+    }
+  }
+}
+```
+
+---
+
+### 三种方式对比
+
+| 特性 | 方式 A (npm/npx) | 方式 B (npx tsx) | 方式 C (编译后) |
+|------|------------------|------------------|-----------------|
+| 安装方式 | `npm install -g` 或 `npx` | 从源码安装 | 从源码安装 |
+| 需要构建 | ❌ 不需要 | ❌ 不需要 | ✅ 需要 `npm run build` |
+| 启动速度 | ⚡ 最快 | 稍慢（首次需要下载 tsx） | 快 |
+| 更新方式 | `npm update -g` 或自动 | 需要 git pull | 需要 git pull + build |
+| 推荐场景 | ⭐ 生产环境、日常使用 | 开发环境、频繁修改 | 生产环境、稳定版本 |
+
+**推荐**: 
+- ⭐ **日常使用推荐方式 A (npm/npx)**：最简单快捷，自动更新
+- 开发时使用**方式 B (npx tsx)**：修改代码后无需重新构建
 
 ---
 
@@ -526,10 +604,12 @@ which node
 
 #### 问题 3: 权限错误
 
-确保 `dist/index.js` 文件有执行权限：
+如果使用编译后的文件，确保 `dist/index.js` 文件有执行权限：
 ```bash
-chmod +x /Users/yanxx/tools/mcp/postgresql-server-rw/dist/index.js
+chmod +x /path/to/mcp-server-postgresql-rw/dist/index.js
 ```
+
+如果使用 npm 安装，通常不会有权限问题。
 
 #### 问题 4: 查看日志
 
@@ -537,7 +617,11 @@ chmod +x /Users/yanxx/tools/mcp/postgresql-server-rw/dist/index.js
 
 ## 发布到 npm
 
-如果你想将这个包发布到 npm 供其他人使用，请按照以下步骤操作：
+✅ **已发布**: 此包已发布到 npm，可以直接使用 `npm install -g mcp-server-postgresql-rw` 安装。
+
+📦 **npm 包地址**: [https://www.npmjs.com/package/mcp-server-postgresql-rw](https://www.npmjs.com/package/mcp-server-postgresql-rw)
+
+如果你想更新版本或重新发布，请按照以下步骤操作：
 
 ### 1. 准备发布
 
